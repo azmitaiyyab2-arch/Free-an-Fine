@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tactical Strike | भारत का 5v5 टैक्टिकल शूटर</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #FF4D00;
+            --primary-dark: #CC3E00;
+            --secondary: #0066FF;
+            --dark: #0A0A14;
+            --light: #FFFFFF;
+            --gray: #8A94A6;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--dark);
+            color: var(--light);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(10, 10, 20, 0.95);
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .logo span:first-child {
+            color: var(--light);
+        }
+
+        .logo span:last-child {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--gray);
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .download-btn {
+            background: var(--primary);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(rgba(10, 10, 20, 0.9), rgba(10, 10, 20, 0.9)), url('https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1600');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            padding-top: 80px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-badge {
+            background: rgba(255, 77, 0, 0.1);
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 8px 20px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 30px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .hero-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 48px;
+            font-weight: 900;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 18px;
+            color: var(--gray);
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--primary);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: var(--gray);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 15px 35px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: 0.3s;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 77, 0, 0.2);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Features */
+        .features {
+            padding: 100px 0;
+            background: #111118;
+        }
+
+        .section-title {
+            text-align: center;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 36px;
+            margin-bottom: 50px;
+            color: white;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: 0.3s;
+        }
+
+        .feature-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(255, 77, 0, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: var(--primary);
+        }
+
+        .feature-card h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        /* Download Section */
+        .download-section {
+            padding: 100px 0;
+            background: #0A0A14;
+            text-align: center;
+        }
+
+        .download-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .store-buttons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .store-btn {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px 30px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            text-decoration: none;
+            color: white;
+            min-width: 200px;
+        }
+
+        .store-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .store-btn i {
+            font-size: 32px;
+        }
+
+        .store-btn.playstore i {
+            color: #34A853;
+        }
+
+        .store-btn.appstore i {
+            color: white;
+        }
+
+        .btn-text {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+
+        .btn-text small {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        .btn-text strong {
+            font-size: 18px;
+        }
+
+        /* Footer */
+        footer {
+            background: #05050A;
+            padding: 60px 0 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        .footer-links h4 {
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .footer-links a {
+            display: block;
+            color: var(--gray);
+            text-decoration: none;
+            margin-bottom: 10px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--gray);
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero-title {
+                font-size: 36px;
+            }
+            
+            .hero-stats {
+                flex-wrap: wrap;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+            
+            .store-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container nav-container">
+            <div class="logo">
+                <span>TACTICAL</span>
+                <span>STRIKE</span>
+            </div>
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#features">Features</a>
+                <a href="#characters">Characters</a>
+                <a href="#tournaments">Tournaments</a>
+                <a href="#download" class="download-btn">Download</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">MADE IN INDIA</div>
+                <h1 class="hero-title">TACTICAL STRIKE</h1>
+                <p class="hero-subtitle">
+                    भारत का पहला प्रोफेशनल 5v5 टैक्टिकल शूटर। डायनेमिक वेदर, इंटरएक्टिव मैप्स, 
+                    और ईस्पोर्ट्स रेडी गेमप्ले के साथ।
+                </p>
+                
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">1M+</span>
+                        <span class="stat-label">Active Players</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">4.8★</span>
+                        <span class="stat-label">Rating</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">₹50L+</span>
+                        <span class="stat-label">Prize Pool</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">24/7</span>
+                        <span class="stat-label">Matches</span>
+                    </div>
+                </div>
+                
+                <div class="hero-buttons">
+                    <a href="#download" class="btn btn-primary">
+                        <i class="fab fa-google-play"></i>
+                        Download Now
+                    </a>
+                    <a href="#features" class="btn btn-secondary">
+                        <i class="fas fa-play-circle"></i>
+                        Watch Trailer
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title">GAME FEATURES</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-cloud-sun-rain"></i>
+                    </div>
+                    <h3>Dynamic Weather</h3>
+                    <p>बारिश, कोहरा, रात का समय - गेमप्ले बदलता रहता है</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <h3>भारतीय मैप्स</h3>
+                    <p>मुंबई डॉकयार्ड, गोवा बीच, राजस्थान फोर्ट</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-user-plus"></i>
+                    </div>
+                    <h3>कैरेक्टर प्रोग्रेशन</h3>
+                    <p>यूनिक स्किल ट्री, अपग्रेड करें, एबिलिटीज अनलॉक करें</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h3>ईस्पोर्ट्स रेडी</h3>
+                    <p>टूर्नामेंट सिस्टम, स्पेक्टेटर मोड, प्रोफेशनल फीचर्स</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>एंटी-चीट सिस्टम</h3>
+                    <p>एडवांस्ड सिक्योरिटी, फेयर गेमप्ले गारंटी</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <h3>डेडिकेटेड सर्वर्स</h3>
+                    <p>लो लेटेंसी, 99.9% अपटाइम, स्मूथ गेमप्ले</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section class="download-section" id="download">
+        <div class="container">
+            <div class="download-content">
+                <h2 class="section-title">DOWNLOAD NOW</h2>
+                <p style="color: var(--gray); margin-bottom: 30px;">
+                    1 मिलियन+ प्लेयर्स के साथ जुड़ें। फ्री है, हमेशा रहेगा।
+                </p>
+                
+                <div class="store-buttons">
+                    <a href="https://play.google.com/store" class="store-btn playstore" target="_blank">
+                        <i class="fab fa-google-play"></i>
+                        <div class="btn-text">
+                            <small>GET IT ON</small>
+                            <strong>Google Play</strong>
+                        </div>
+                    </a>
+                    
+                    <a href="https://apps.apple.com" class="store-btn appstore" target="_blank">
+                        <i class="fab fa-apple"></i>
+                        <div class="btn-text">
+                            <small>Download on</small>
+                            <strong>App Store</strong>
+                        </div>
+                    </a>
+                </div>
+                
+                <div style="color: var(--gray); font-size: 14px; margin-top: 30px;">
+                    <i class="fas fa-exclamation-circle"></i>
+                    Age 13+ Recommended | In-App Purchases
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <div class="footer-logo">
+                        <span>TACTICAL</span>
+                        <span style="color: var(--primary);">STRIKE</span>
+                    </div>
+                    <p style="color: var(--gray); margin-bottom: 20px;">
+                        भारत में बना, दुनिया के लिए। प्रोफेशनल गेमिंग एक्सपीरियंस।
+                    </p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-discord"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>गेम</h4>
+                    <a href="#home">होम</a>
+                    <a href="#features">फीचर्स</a>
+                    <a href="#download">डाउनलोड</a>
+                    <a href="#">पैच नोट्स</a>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>कंपनी</h4>
+                    <a href="#">हमारे बारे में</a>
+                    <a href="#">करियर</a>
+                    <a href="#">समाचार</a>
+                    <a href="#">संपर्क करें</a>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>सहायता</h4>
+                    <a href="#">सहायता केंद्र</a>
+                    <a href="#">FAQs</a>
+                    <a href="#">कम्युनिटी</a>
+                    <a href="#">रिपोर्ट बग</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2024 Digital Strike Games. All rights reserved.</p>
+                <p style="margin-top: 10px; font-size: 12px;">
+                    Made with ❤️ in India | All game assets are original creations
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple JavaScript for mobile menu
+        document.addEventListener('DOMContentLoaded', function() {
+            // Smooth scrolling
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Mobile menu toggle
+            const navToggle = document.createElement('button');
+            navToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            navToggle.style.cssText = `
+                background: none;
+                border: none;
+                color: white;
+                font-size: 24px;
+                cursor: pointer;
+                display: none;
+            `;
+            
+            document.querySelector('.nav-container').appendChild(navToggle);
+            
+            navToggle.addEventListener('click', function() {
+                const navLinks = document.querySelector('.nav-links');
+                navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            });
+            
+            // Responsive check
+            function checkResponsive() {
+                const navLinks = document.querySelector('.nav-links');
+                const navToggle = document.querySelector('button');
+                
+                if (window.innerWidth <= 768) {
+                    navLinks.style.display = 'none';
+                    navToggle.style.display = 'block';
+                } else {
+                    navLinks.style.display = 'flex';
+                    navToggle.style.display = 'none';
+                }
+            }
+            
+            checkResponsive();
+            window.addEventListener('resize', checkResponsive);
+            
+            // Download buttons alert
+            document.querySelectorAll('.btn-primary, .store-btn').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    if (this.getAttribute('href') === '#download') {
+                        e.preventDefault();
+                        alert('Game would download from official stores!');
+                    }
+                });
+            });
+            
+            // Visitor counter simulation
+            const statNumbers = document.querySelectorAll('.stat-number');
+            setInterval(() => {
+                statNumbers.forEach(stat => {
+                    if (stat.textContent.includes('M')) {
+                        const num = parseInt(stat.textContent) + Math.floor(Math.random() * 10);
+                        stat.textContent = num + 'M+';
+                    } else if (stat.textContent.includes('L')) {
+                        const num = parseInt(stat.textContent) + Math.floor(Math.random() * 5);
+                        stat.textContent = num + 'L+';
+                    }
+                });
+            }, 30000);
+        });
+    </script>
+</body>
+</html>
